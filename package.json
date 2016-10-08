@@ -1,6 +1,6 @@
 {
   "name": "auto-import-preloader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Auto imports for ES6 and webpack",
   "main": "index.js",
   "scripts": {

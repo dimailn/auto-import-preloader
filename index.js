@@ -5,7 +5,10 @@ module.exports = function(source) {
   var currentFileName = fileName(this.resourcePath);
   
   autoImportDefinitions.forEach(autoImport => {
-    if(isNotDefinitionFile(autoImport, currentFileName) && containsImportUsage(autoImport, source)) {
+    if(isNotDefinitionFile(autoImport, currentFileName) &&
+        isNotImportedManually(autoImport, source) &&
+        containsImportUsage(autoImport, source)) {
+
       source = appendImport(autoImport, source);
     }
   });
@@ -24,6 +27,10 @@ function containsImportUsage(autoImport, fileContent) {
 
 function isNotDefinitionFile(autoImport, file) {
   return fileName(autoImport.from) != file;
+}
+
+function isNotImportedManually(autoImport, fileContent) {
+  return fileContent.search(`import ${autoImport.import} from`) == -1;
 }
 
 function fileName(path) {
