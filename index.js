@@ -18,11 +18,12 @@ module.exports = function(source) {
 };
 
 function appendImport(autoImport, fileContent) {
-  return `import ${autoImport.import} from '${autoImport.from}';\n` + fileContent;  
+  return `${autoImport.import} = require '${autoImport.from}'\n` + fileContent;  
 }
 
 function containsImportUsage(autoImport, fileContent) {
-  return fileContent.search(autoImport.search || autoImport.import) != -1;
+  return fileContent.search(autoImport.search || autoImport.import) != -1 ||
+    autoImport.import == 'React' && (fileContent.search(/<\w+>/) || fileContent.search(/<\w+\/>/));
 }
 
 function isNotDefinitionFile(autoImport, file) {
@@ -30,7 +31,7 @@ function isNotDefinitionFile(autoImport, file) {
 }
 
 function isNotImportedManually(autoImport, fileContent) {
-  return fileContent.search(`import ${autoImport.import} from`) == -1;
+  return fileContent.search(`${autoImport.import} =`) == -1;
 }
 
 function fileName(path) {

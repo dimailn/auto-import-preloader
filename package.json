@@ -1,7 +1,7 @@
 {
   "name": "auto-import-preloader",
   "version": "0.1.1",
-  "description": "Auto imports for ES6 and webpack",
+  "description": "Auto imports for CoffeeScript and webpack(with CJSX)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
